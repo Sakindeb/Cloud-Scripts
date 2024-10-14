@@ -4,7 +4,7 @@
 echo "Fetching list of instances..."
 gcloud compute instances list --format="table(name, zone, status)"
 
-# Prompt user to select an instance
+# Prompt  selection of  an instance
 echo "Enter the name of the instance you want to start:"
 read INSTANCE_NAME
 
@@ -20,7 +20,7 @@ fi
 echo "Starting instance ${INSTANCE_NAME} in zone ${INSTANCE_ZONE}..."
 gcloud compute instances start "${INSTANCE_NAME}" --zone="${INSTANCE_ZONE}"
 
-# Fetch external and internal IPs
+# Fetch IPs
 EXTERNAL_IP=$(gcloud compute instances describe "${INSTANCE_NAME}" --zone="${INSTANCE_ZONE}" --format="get(networkInterfaces[0].accessConfigs[0].natIP)")
 INTERNAL_IP=$(gcloud compute instances describe "${INSTANCE_NAME}" --zone="${INSTANCE_ZONE}" --format="get(networkInterfaces[0].networkIP)")
 
